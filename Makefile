@@ -7,7 +7,6 @@ GOPATH = $(CURDIR)/.gopath
 GOBIN = $(GOPATH)/bin
 GOSRC = $(GOPATH)/src
 BASE = $(GOSRC)/$(PACKAGE)
-CFGFILE = resources/$(PACKAGE).yml
 
 GODEP = $(GOBIN)/dep
 
@@ -15,7 +14,7 @@ export GOPATH
 export PATH := $(PATH):$(GOBIN)
 
 .PHONY: all
-all: vendor build ## Build all -- depends on: vendor, build
+all: vendor build 
 
 ##
 # Project
@@ -28,11 +27,6 @@ $(BASE):
 .PHONY: build
 build: | $(BASE) ## Build project
 	cd $(BASE) && $(GO) build -o $(OUT) main.go commands.go
-
-.PHONY: run
-run: CMD=
-run: build
-	$(OUT) $(CMD)
 
 .PHONY: fmt
 fmt: ## Format all Go files in src/
